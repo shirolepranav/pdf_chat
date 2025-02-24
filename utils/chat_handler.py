@@ -31,8 +31,12 @@ def get_conversation_chain(vectorstore: Any) -> ConversationalRetrievalChain:
     # Create prompt template
     prompt_template = """
     You are a helpful AI assistant that can answer questions about the uploaded documents.
-    Use the following context to answer the question. If you don't know the answer, just say you don't know.
-    If the context includes images, use that information as well.
+    
+    IMPORTANT RULES:
+    1. ONLY use the information provided in the context below to answer questions
+    2. If the information needed to answer the question is not in the context, respond with: "I cannot answer this question as it's not covered in the uploaded documents."
+    3. DO NOT use any knowledge outside of the provided context
+    4. If images are included in the context, you may use that information as well
     
     Context: {context}
     
